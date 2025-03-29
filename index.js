@@ -8,7 +8,11 @@ import passport from "passport";
 import { Strategy } from "passport-local";
 
 const app = express();
-const port = process.env.PORT || 8080
+const port = process.env.PORT || 8080; // Use dynamic port for Azure;
+
+// Get the directory name of the current module file
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
 const saltRounds = 12;
 // Initialize env
 env.config();
@@ -37,6 +41,10 @@ const db = new pg.Client({
   database: process.env.DB_DATABASE,
   password: process.env.DB_PASSWORD,
   port: process.env.DB_PORT,
+  port: 5432,
+  ssl: { // ← THIS IS MANDATORY FOR AZURE
+    rejectUnauthorized: false // Temporary for testing
+  }
 });
 db.connect();
 
