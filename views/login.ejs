@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Log In</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/60979908e3.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="header">
+      <button type="button" class="icon-btn">
+        <i class="fa-solid fa-angle-left"></i>
+      </button>
+      <h1>Log In</h1>
+    </div>
+    <div class="content">
+      <div class="role-btn">
+        <button type="button" id="user">User</button>
+        <button type="button" id="coach">Coach</button>
+      </div>
+      <div class="data-form logIn-form">
+        <form action="/login" method="post">
+          <label for="email">Email</label>
+          <div class="input-btn">
+            <input
+              type="email"
+              id="email"
+              name="username"
+              placeholder="johndoe@gmail.com"
+              required
+            />
+          </div>
+
+          <label for="password">Password</label>
+          <div class="input-btn">
+            <input type="password" id="password" name="password" required />
+            <button type="button" id="toggle-btn-one" class="icon-btn">
+              <i class="fa-solid fa-eye-slash" id="toggleIcon1"></i>
+            </button>
+          </div>
+          <div class="password-cta-link">
+            <a href="#" class="cta-link">Forgot password?</a>
+          </div>
+
+          <input type="submit" class="form-btn logIn-btn" value="Log In" />
+        </form>
+      </div>
+      <p>
+        Don't have an account? <a href="/signup" class="cta-link">Sign Up</a>
+      </p>
+    </div>
+    <script src="/index.js"></script>
+  </body>
+</html>

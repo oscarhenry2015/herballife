@@ -1,0 +1,96 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "serverName": {
+            "value": "herbal-life-postgresql"
+        },
+        "location": {
+            "value": "eastus2"
+        },
+        "serverEdition": {
+            "value": "Burstable"
+        },
+        "storageSizeGB": {
+            "value": 32
+        },
+        "haEnabled": {
+            "value": "Disabled"
+        },
+        "backupRetentionDays": {
+            "value": 7
+        },
+        "geoRedundantBackup": {
+            "value": "Disabled"
+        },
+        "availabilityZone": {
+            "value": ""
+        },
+        "vmName": {
+            "value": "Standard_B1ms"
+        },
+        "standbyAvailabilityZone": {
+            "value": ""
+        },
+        "firewallRules": {
+            "value": {
+                "rules": [
+                    {
+                        "name": "AllowAllAzureServicesAndResourcesWithinAzureIps_2025-2-15_12-51-3",
+                        "endIPAddress": "0.0.0.0",
+                        "startIPAddress": "0.0.0.0"
+                    },
+                    {
+                        "name": "ClientIPAddress_2025-2-15_12-50-12",
+                        "startIPAddress": "90.202.177.22",
+                        "endIPAddress": "90.202.177.22"
+                    }
+                ]
+            }
+        },
+        "network": {
+            "value": {
+                "publicNetworkAccess": "Enabled"
+            }
+        },
+        "tags": {
+            "value": {}
+        },
+        "version": {
+            "value": "16"  
+        },
+        "administratorLogin": {
+            "value": "waiguru"
+        },
+        "administratorLoginPassword": {
+            "value": "P@ss1234" 
+        },
+        "apiVersion": {
+            "value": "2022-12-01" 
+        },
+        "aadEnabled": {
+            "value": true
+        },
+        "aadData": {
+            "value": {
+                "tenantId": "72b7ff39-ea55-4d53-924c-80758b5dba9b",
+                "principalName": "oscarhenry2015_gmail.com#EXT#@oscarhenry2015gmail.onmicrosoft.com",
+                "principalType": "User",
+                "objectId": "56211441-61d1-4a6c-83cb-b79782194e6c"
+            }
+        },
+        "authConfig": {
+            "value": {
+                "activeDirectoryAuth": "Enabled",
+                "passwordAuth": "Enabled",
+                "tenantId": "72b7ff39-ea55-4d53-924c-80758b5dba9b"
+            }
+        },
+        "storageAutogrow": {
+            "value": "Disabled"
+        },
+        "iopsTier": {
+            "value": "P4"
+        }
+    }
+}

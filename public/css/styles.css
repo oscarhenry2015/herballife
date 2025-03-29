@@ -1,0 +1,262 @@
+:root {
+    --outline-color: #224945;
+    --accent-color: #ccefe0;
+    --neutral-bg: #f8f6f6;
+    --primary-color: #266431;
+    --complementary-color: #f5b748;
+    --alert-color: #ff6f4c;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Lato", sans-serif;
+    font-size: 1rem;
+    color: var(--outline-color);
+  }
+  
+  .content {
+    max-width: 600px;
+    display: flex;
+    margin: 0 auto;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    gap: 20px;
+  }
+  
+  .landing-page > .content {
+    height: 100vh;
+    justify-content: center;
+  }
+  
+  .logo {
+    margin-bottom: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .button {
+    margin-bottom: 10px;
+  }
+  
+  .button > button,
+  .form-btn {
+    background-color: var(--primary-color);
+    color: var(--neutral-bg);
+    font-weight: bold;
+    font-size: 1rem;
+    padding: 15px;
+    width: 300px;
+    border: none;
+    border-radius: 10px;
+  }
+  
+  .landing-page p {
+    margin: 10px 0px;
+    color: var(--outline-color);
+  }
+  
+  .CTA,
+  .cta-link {
+    color: var(--primary-color);
+    font-weight: 800;
+    text-decoration: none;
+  }
+  
+  .header {
+    display: flex;
+    gap: 3rem;
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  
+  .header > .icon-btn {
+    position: absolute;
+    left: 20px;
+    top: 30%;
+  }
+  
+  .icon-btn {
+    padding: 8px;
+    border: none;
+    background-color: transparent;
+  }
+  .fa-solid {
+    font-weight: 900;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+  }
+  
+  .header h1 {
+    font-size: 1.6rem;
+    font-weight: 900;
+  }
+  
+  .role-btn {
+    width: 100%;
+    background-color: var(--neutral-bg);
+    display: flex;
+    border-radius: 10px;
+  }
+  
+  .role-btn button {
+    flex: 1;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    text-align: center;
+  }
+  
+  .role-btn #user {
+    background-color: var(--accent-color);
+    color: var(--outline-color);
+    font-weight: bold;
+  }
+  
+  .role-btn #coach {
+    background-color: var(--neutral-bg);
+  }
+  
+  .data-form {
+    width: 100%;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .input-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    margin: 8px 0px 15px 0px;
+  }
+  
+  input {
+    flex: 1;
+    padding: 15px;
+  }
+  
+  .input-btn,
+  input {
+    background-color: var(--neutral-bg);
+    border-radius: 10px;
+    border: none;
+  }
+  
+  .form-btn {
+    margin: 15px auto;
+    width: 100%;
+  }
+  
+  .cta-link {
+    color: var(--primary-color);
+  }
+  
+  .logIn-form {
+    margin-top: 70px;
+  }
+  
+  .logIn-btn {
+    margin-top: 56px;
+  }
+  
+  /* Main menu */
+  nav {
+    display: flex;
+    padding: 20px;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  nav .fa-solid {
+    font-size: 24px;
+  }
+  
+  .fa-user {
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  /* Side-menu avigation bar */
+  
+  .side-menu {
+    display: flex;
+    background-color: var(--accent-color);
+    width: 290px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: -290px;
+    overflow-y: auto;
+    flex-direction: column;
+    justify-content: center;
+    transition: left 0.3s ease-in-out;
+  }
+  
+  /* Show side menu when active class is added */
+  .side-menu.active {
+    left: 0;
+  }
+  
+  #close-btn {
+    padding: 10px;
+    border: none;
+    width: 50px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background: none;
+    font-size: 20px;
+    transition: transform 0.2s ease-out;
+  }
+  
+  #close-btn:hover,
+  .fa-user:hover {
+    transform: scale(1.2);
+  }
+  
+  .side-menu .menu {
+    width: 100%;
+    height: 100%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+  
+  .side-menu .menu .item {
+    text-align: left;
+  }
+  
+  .side-menu .menu .item a {
+    color: var(--outline-color);
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 1.2rem;
+    display: block;
+    padding: 5px 30px;
+    line-height: 60px;
+    border-radius: 10px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  
+  .side-menu .menu .item a i {
+    margin-right: 15px;
+    transition: color 0.2s ease;
+  }
+  
+  .side-menu .menu .item a:hover {
+    background-color: var(--primary-color);
+    color: var(--neutral-bg);
+  }
+  
+  .side-menu .menu .item a:hover i {
+    color: var(--neutral-bg);
+  }
