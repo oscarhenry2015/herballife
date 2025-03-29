@@ -8,7 +8,7 @@ import passport from "passport";
 import { Strategy } from "passport-local";
 
 const app = express();
-const port = process.env.PORT || 3000; // Use dynamic port for Azure;
+const port = process.env.PORT || 8080; // Use dynamic port for Azure;
 
 // Get the directory name of the current module file
 const __dirname = dirname(fileURLToPath(import.meta.url));
