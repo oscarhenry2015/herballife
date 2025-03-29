@@ -6,22 +6,12 @@ import env from "dotenv";
 import session from "express-session";
 import passport from "passport";
 import { Strategy } from "passport-local";
-import { fileURLToPath } from "url";
-import { dirname } from "path";
-
-// Initialize environment variables
-env.config();
 
 const app = express();
-const port = process.env.PORT || 8080; // Use dynamic port for Azure
-
-// Get the directory name of the current module file
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-// Set view engine for EJS (make sure your EJS templates are in a "views" folder)
-app.set("view engine", "ejs");
-app.set("views", __dirname + "/views");
+const port = process.env.PORT || 3000
+const saltRounds = 12;
+// Initialize env
+env.config();
 
 // Initialize session
 app.use(
@@ -56,20 +46,20 @@ app.use(express.static("public"));
 
 // Routes
 app.get("/", (req, res) => {
-  res.render("index");
+  res.render("index.ejs");
 });
 
 app.get("/login", (req, res) => {
-  res.render("login");
+  res.render("login.ejs");
 });
 
 app.get("/signup", (req, res) => {
-  res.render("signup");
+  res.render("signup.ejs");
 });
 
 app.get("/home", (req, res) => {
   if (req.isAuthenticated()) {
-    res.render("home");
+    res.render("home.ejs");
   } else {
     res.redirect("/login");
   }
@@ -77,19 +67,22 @@ app.get("/home", (req, res) => {
 
 app.post("/signup", async (req, res) => {
   const { person, email, password } = req.body;
-  const saltRounds = 12;
+
   try {
     // Check if user exists
-    const existingUser = await db.query("SELECT * FROM users WHERE email = $1", [email]);
+    const existingUser = await db.query(
+      "SELECT * FROM users WHERE email = $1",
+      [email]
+    );
     if (existingUser.rows.length > 0) {
       return res.status(409).send("Email already in use.");
     } else {
       // Hash password
       const salt = await bcrypt.genSalt(saltRounds);
       const hashedPassword = await bcrypt.hash(password, salt);
-      // Insert user into database
+      //  Send data to database
       const result = await db.query(
-        "INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *",
+        "INSERT INTO users (name,email,password) VALUES ($1, $2, $3) RETURNING *",
         [person, email, hashedPassword]
       );
       const user = result.rows[0];
@@ -113,38 +106,53 @@ app.post("/signup", async (req, res) => {
 
 app.post("/login", (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
+    // Check for system errors
     if (err) {
       console.error("Login Error", err.message);
       return res
         .status(500)
         .json({ error: "Oops! Something went wrong. Please try again later." });
     }
+
+    // If user is not found ot password in incorrect
     if (!user) {
       return res.status(401).json({ error: info.message });
     }
+
+    // Log user in
     req.login(user, (err) => {
       if (err) {
         console.error("Login Session Error:", err.message);
         return res.status(500).json({ error: "Session error. Try again." });
       }
+      // If log in successful redirect to home
       return res.redirect("/home");
     });
-  })(req, res, next);
+  })(
+    // Manually invoke passport. authenticate
+    req,
+    res,
+    next
+  );
 });
 
-// Configure Passport Local Strategy
+// Register new Strategy
 passport.use(
   new Strategy(async function verify(username, password, cb) {
     try {
-      // Check if email exists in database
-      const result = await db.query("SELECT * FROM users WHERE email = $1", [username]);
+      //  Check if email exists in database
+      const result = await db.query("SELECT * FROM users WHERE email = $1", [
+        username,
+      ]);
       if (result.rows.length === 0) {
         return cb(null, false, { message: "User does not exist." });
       }
       const user = result.rows[0];
       const storedHashedPassword = user.password;
-      // Compare passwords
+
+      // Compare if provided password is the same as password in database
       const isMatch = await bcrypt.compare(password, storedHashedPassword);
+
       if (isMatch) {
         return cb(null, user);
       } else {
@@ -162,18 +170,22 @@ passport.serializeUser((user, cb) => {
 
 passport.deserializeUser(async (id, cb) => {
   try {
-    const result = await db.query("SELECT id, name, email FROM users WHERE id = $1", [id]);
+    const result = await db.query(
+      "SELECT id, name, email FROM users WHERE id = $1",
+      [id]
+    );
     if (result.rows.length === 0) {
       return cb(null, false);
     }
+    // Fetch user from the database
     cb(null, result.rows[0]);
   } catch (err) {
-    console.error("Deserialize Error:", err.message);
+    console.log("Deserialize Error:", err.message);
     cb(err);
   }
 });
 
 // Start Server
 app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+  console.log(`Server listening at port ${port}`);
 });
