@@ -22,6 +22,6 @@ jobs:
       - name: Deploy to Azure App Service
         uses: azure/webapps-deploy@v2
         with:
-          app-name: meal-health-app
+          app-name: Herbal-Life-App
           publish-profile: ${{ secrets.HERBAL_LIFE_SECRET }}
           package: .
