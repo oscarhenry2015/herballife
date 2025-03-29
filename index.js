@@ -190,6 +190,6 @@ passport.deserializeUser(async (id, cb) => {
 });
 
 // Start Server
-app.listen(port, () => {
-  console.log(`Server listening at port ${port}`);
+app.listen(8080, () => {
+    console.log('Server running on port 8080');
 });
